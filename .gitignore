@@ -1,0 +1,7 @@
+.idea/
+*.iml
+*.nogit
+nohup.out
+dist/
+env/
+src/main/app/production.php
