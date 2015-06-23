@@ -1,3 +1,4 @@
+                <?php if(count($this->data['incidents']) > 0) { ?>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -22,3 +23,9 @@
                         <?php } ?>
                     </tbody>
                 </table>
+                <?php } else { ?>
+                <span class="okay-green">
+                    <i class="glyphicon glyphicon-ok-circle great-icon"></i>
+                    <h3 class="text-center">Alle incidenten zijn opgelost. Good job!</h3>
+                </span>
+                <?php } ?>

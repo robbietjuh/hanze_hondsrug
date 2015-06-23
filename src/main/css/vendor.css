@@ -98,3 +98,15 @@ body.logon .sidebar footer {
 .incident-detail .well .row:last-child {
     margin-bottom: 0;
 }
+
+.great-icon {
+    font-size: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+}
+
+.okay-green {
+    color: #52ae15;
+}
