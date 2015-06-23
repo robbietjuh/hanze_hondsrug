@@ -23,6 +23,8 @@
 
                     <?php } ?>
 
+                    <?php if(!isset($this->data['incident_success'])) { ?>
+
                     <div class="form-group">
                         <label for="component">Hardware component</label>
                         <select id="component" name="component" class="form-control">
@@ -46,4 +48,6 @@
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary pull-right" name="create_incident" value="Incident melden &rarr;" />
                     </div>
+
+                    <?php } ?>
                 </form>
