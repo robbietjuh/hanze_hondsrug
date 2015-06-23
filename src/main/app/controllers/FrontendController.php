@@ -70,6 +70,10 @@ class FrontendController extends MvcBaseController {
         // Fetch URL params
         $questionnaire_id = $args[1];
 
+        // Load all components
+        $hc_model = $this->loadModel("HardwareComponentModel");
+        $this->data['componentlist'] = $hc_model->allObjects();
+
         // Load the Questionnaire model and load the questionnaire
         $questionnaire_model = $this->loadModel("QuestionnaireModel");
         $this->data['questionnaire'] = $questionnaire_model->getObjectByPk($questionnaire_id);

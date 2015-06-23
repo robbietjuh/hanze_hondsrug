@@ -73,4 +73,16 @@ class IdentityController extends MvcBaseController {
 
         $this->renderView("identity/login");
     }
+
+    /**
+     * Requests the Identity Middleware to log the user out.
+     * @param $args array URL parameters
+     */
+    public function logout($args) {
+        // Require the user to be logged in
+        $this->im->checkRole(1, '/');
+
+        // Log out the user
+        $this->im->logout('/');
+    }
 }

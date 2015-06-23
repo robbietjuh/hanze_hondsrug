@@ -19,6 +19,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/"><i class="glyphicon glyphicon-lock"></i> <?=$this->data['username'];?></a></li>
+                    <li><a href="/logout">Uitloggen</a></li>
                 </ul>
             </div>
         </div>

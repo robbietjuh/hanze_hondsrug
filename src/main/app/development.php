@@ -62,6 +62,7 @@ class development extends MvcApplication {
         '{^/questionnaire/([0-9-]+)/?}'  => array('FrontendController', 'questionnaire'),
 
         '{^/login$}'                     => array('IdentityController', 'login'),
+        '{^/logout$}'                    => array('IdentityController', 'logout'),
     );
 
     /**
