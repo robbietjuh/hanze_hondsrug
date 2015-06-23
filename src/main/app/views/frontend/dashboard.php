@@ -1,5 +1,9 @@
 <?=$this->renderView("frontend/header");?>
 
+        <ol class="breadcrumb">
+            <li class="active">Dashboard</li>
+        </ol>
+
         <div class="row">
             <div class="col-md-8">
                 <h4>Waar heeft u hulp bij nodig?</h4>
