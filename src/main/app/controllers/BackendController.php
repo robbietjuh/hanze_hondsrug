@@ -36,7 +36,7 @@ class BackendController extends LoggedInController {
 
     /**
      * Renders the incident detail view
-     * @param $args URL params
+     * @param $args array URL params
      */
     public function incident($args) {
         // Load the incident
@@ -55,6 +55,10 @@ class BackendController extends LoggedInController {
         $this->renderView("backend/detail_incident");
     }
 
+    /**
+     * Deletes an incident and redirects back to the backend dashboard afterwards
+     * @param $args array URL params
+     */
     public function incidentDelete($args) {
         // Load the incident
         $incident_model = $this->loadModel("IncidentModel");
