@@ -55,4 +55,23 @@ class BackendController extends LoggedInController {
         $this->renderView("backend/detail_incident");
     }
 
+    public function incidentDelete($args) {
+        // Load the incident
+        $incident_model = $this->loadModel("IncidentModel");
+        $incident = $incident_model->getObjectByPk($args[1]);
+
+        // Show 404 when no incident was found
+        if($incident === false)
+            $this->MvcInstance->dieWithDebugMessageOr404(
+                "Incident not found",
+                array("URL arguments" => $args)
+            );
+
+        // Delete the incident
+        $incident_model->deleteWithPk($args[1]);
+
+        // Redirect back to the dashboard
+        $this->redirectToUrl("/backend");
+    }
+
 }
