@@ -1,0 +1,58 @@
+<?php
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * IncidentModel.php
+ * P14-helpdesk_hondsrug
+ *
+ * Model for the user table
+ *
+ * @author     R. de Vries <r.devries@robbytu.net>
+ * @version    1.0.0
+ * @date       23/06/2015
+ */
+class IncidentModel extends MvcBaseModel {
+    /**
+     * @var string Database table name for this model
+     */
+    protected $tableName = "incident";
+
+    /**
+     * @var string Database table primary key field name for this model
+     */
+    protected $tablePrimaryKeyField = "identificatiecode";
+
+    /**
+     * Creates a new incident in the database and returns the entry itself. If creation
+     * fails, an exception will be thrown.
+     *
+     * @param int $hardware_component Hardware component entry ID
+     * @param string $title Title for the incident
+     * @param string $description Description for the incident
+     * @param int $reporter User ID of the reporter
+     * @return array
+     * @throws Exception
+     */
+    public function createIncident($hardware_component, $title, $description, $reporter) {
+        // Set up query
+        $query = $this->MvcInstance->db_conn->prepare(
+            "INSERT INTO {$this->tableName} SET" .
+            " hardware_component = :hardware_component," .
+            " datum = NOW()," .
+            " titel = :title," .
+            " omschrijving = :description," .
+            " melder = :reporter"
+        );
+
+        // .. and execute it
+        if($query->execute(array(
+            ':hardware_component' => $hardware_component,
+            ':title' => $title,
+            ':description' => $description,
+            ':reporter' => $reporter
+        )))
+            return $this->getObjectByPk($this->MvcInstance->db_conn->lastInsertId());
+        else
+            throw new Exception($query->errorInfo()[2]);
+    }
+}
