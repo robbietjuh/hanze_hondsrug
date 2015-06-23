@@ -36,9 +36,14 @@ class FrontendController extends MvcBaseController {
         // Check whether the user account has access
         $this->im->checkRole(1);
         $this->account = $this->im->getAccount();
+        $this->data['username'] = $this->account['gebruikersnaam'];
     }
 
+    /**
+     * Renders the frontend dashboard view
+     * @param $args array URL params
+     */
     public function dashboard($args) {
-        echo "Ingelogd als ".$this->account['gebruikersnaam'];
+        $this->renderView("frontend/header");
     }
 }
