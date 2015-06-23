@@ -78,4 +78,18 @@ class BackendController extends LoggedInController {
         $this->redirectToUrl("/backend");
     }
 
+    /**
+     * Renders an overview of currently known questionnaires
+     * @param $args array URL params
+     */
+    public function questionnaires($args) {
+        // Load the questionnaires
+        $qs_model = $this->loadModel("QuestionnaireModel");
+        $this->data['questionnaires'] = $qs_model->allObjects();
+
+        // Render the view
+        $this->data['page'] = 'questionnaires';
+        $this->renderView("backend/questionnaires");
+    }
+
 }

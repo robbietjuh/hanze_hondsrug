@@ -64,6 +64,7 @@ class development extends MvcApplication {
         '{^/backend$}'                      => array('BackendController', 'dashboard'),
         '{^/backend/incident/([0-9-]+)$}'   => array('BackendController', 'incident'),
         '{^/backend/incident/([0-9-]+)/delete$}' => array('BackendController', 'incidentDelete'),
+        '{^/backend/questionnaires$}'       => array('BackendController', 'questionnaires'),
 
         '{^/login$}'                        => array('IdentityController', 'login'),
         '{^/logout$}'                       => array('IdentityController', 'logout'),
