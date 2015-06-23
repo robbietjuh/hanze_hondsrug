@@ -26,7 +26,9 @@
 
     <div class="jumbotron">
         <div class="container">
-            <h1>Frontend titel</h1>
-            <p class="lead">Het dampende en stampende incidentenmanagementsysteem van de Hondsrug!</p>
+            <h1>Welkom, <?=$this->data['displayname'];?></h1>
+            <p class="lead">Rechts kunt u een incident melden, links kunt u uw probleem oplossen</p>
         </div>
     </div>
+
+    <div class="container">
