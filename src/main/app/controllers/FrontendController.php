@@ -40,6 +40,7 @@ class FrontendController extends MvcBaseController {
         // Set up user data
         $this->data['username'] = $this->account['gebruikersnaam'];
         $this->data['displayname'] = $this->account['weergavenaam'];
+        $this->data['role'] = $this->account['rol'];
     }
 
     /**

@@ -19,6 +19,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/"><i class="glyphicon glyphicon-lock"></i> <?=$this->data['username'];?></a></li>
+                    <?php if($this->data['role'] > 1) { ?><li><a href="/backend">Backend</a></li><?php } ?>
                     <li><a href="/logout">Uitloggen</a></li>
                 </ul>
             </div>
