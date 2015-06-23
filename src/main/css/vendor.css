@@ -90,3 +90,11 @@ body.logon .sidebar footer {
     line-height: 20px;
     display: block;
 }
+
+.incident-detail .well .row {
+    margin-bottom: 5px;
+}
+
+.incident-detail .well .row:last-child {
+    margin-bottom: 0;
+}

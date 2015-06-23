@@ -34,4 +34,25 @@ class BackendController extends LoggedInController {
         $this->renderView("backend/dashboard");
     }
 
+    /**
+     * Renders the incident detail view
+     * @param $args URL params
+     */
+    public function incident($args) {
+        // Load the incident
+        $incident_model = $this->loadModel("IncidentModel");
+        $this->data['incident'] = $incident_model->getObjectByPk($args[1]);
+
+        // Show 404 when no incident was found
+        if($this->data['incident'] === false)
+            $this->MvcInstance->dieWithDebugMessageOr404(
+                "Incident not found",
+                array("URL arguments" => $args)
+            );
+
+        // Render the incident detail view
+        $this->data['page'] = 'incidents';
+        $this->renderView("backend/detail_incident");
+    }
+
 }

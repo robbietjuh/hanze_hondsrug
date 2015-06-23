@@ -56,15 +56,16 @@ class development extends MvcApplication {
      * you want to dispatch to. The functionname is called on the controller.
      */
     protected $urls = array(
-        '{^(.*)$}'                       => array('DefaultController', 'render404'),
+        '{^(.*)$}'                          => array('DefaultController', 'render404'),
 
-        '{^/?$}'                         => array('FrontendController', 'dashboard'),
-        '{^/questionnaire/([0-9-]+)/?$}' => array('FrontendController', 'questionnaire'),
+        '{^/?$}'                            => array('FrontendController', 'dashboard'),
+        '{^/questionnaire/([0-9-]+)/?$}'    => array('FrontendController', 'questionnaire'),
 
-        '{^/backend$}'                   => array('BackendController', 'dashboard'),
+        '{^/backend$}'                      => array('BackendController', 'dashboard'),
+        '{^/backend/incident/([0-9-]+)/?$}' => array('BackendController', 'incident'),
 
-        '{^/login$}'                     => array('IdentityController', 'login'),
-        '{^/logout$}'                    => array('IdentityController', 'logout'),
+        '{^/login$}'                        => array('IdentityController', 'login'),
+        '{^/logout$}'                       => array('IdentityController', 'logout'),
     );
 
     /**
