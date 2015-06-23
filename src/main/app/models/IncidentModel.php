@@ -62,7 +62,7 @@ class IncidentModel extends MvcBaseModel {
      */
     public function allObjects() {
         // Fetch all incidents
-        $incidents = $this->allObjectsWithQuery("ORDER BY datum");
+        $incidents = $this->allObjectsWithQuery("ORDER BY datum DESC");
 
         // Fetch user details for each incident
         $user_model = $this->loadModel("UserModel");

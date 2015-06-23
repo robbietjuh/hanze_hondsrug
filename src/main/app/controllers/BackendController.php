@@ -27,7 +27,7 @@ class BackendController extends LoggedInController {
     public function dashboard($args) {
         // Load all incidents
         $incident_model = $this->loadModel("IncidentModel");
-        $this->data['incidents'] = $incident_model->allObjectsWithQuery("ORDER BY datum DESC");
+        $this->data['incidents'] = $incident_model->allObjects();
 
         // Render the dashboard view
         $this->data['page'] = 'incidents';
