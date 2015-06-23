@@ -59,7 +59,9 @@ class development extends MvcApplication {
         '{^(.*)$}'                       => array('DefaultController', 'render404'),
 
         '{^/?$}'                         => array('FrontendController', 'dashboard'),
-        '{^/questionnaire/([0-9-]+)/?}'  => array('FrontendController', 'questionnaire'),
+        '{^/questionnaire/([0-9-]+)/?$}' => array('FrontendController', 'questionnaire'),
+
+        '{^/backend$}'                   => array('BackendController', 'dashboard'),
 
         '{^/login$}'                     => array('IdentityController', 'login'),
         '{^/logout$}'                    => array('IdentityController', 'logout'),
