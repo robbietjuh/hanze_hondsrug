@@ -1,0 +1,74 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body.logon {
+    background-image: url('/gfx/logon.jpg');
+    background-size: cover;
+}
+
+body.logon .holder {
+    min-width: 650px;
+    min-height: 650px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body.logon .sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 390px;
+    background-color: #fff;
+    padding: 50px;
+}
+
+body.logon .sidebar .image_header {
+    margin-bottom: 50px;
+}
+
+body.logon .sidebar .message_holder {
+    font-size: 0.9em;
+    font-family: Arial, sans-serif;
+    margin-bottom: 40px;
+}
+
+body.logon .sidebar .message_holder .message {
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    width: 325px;
+}
+
+body.logon .sidebar .message_holder .message.info {
+    color: #3a87ad;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    border-left: solid 3px;
+}
+
+body.logon .sidebar .message_holder .message.error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    border-left: solid 3px;
+}
+
+body.logon .sidebar footer {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    right: 50px;
+    color: #aaa;
+    font-size: 0.8em;
+    font-family: Arial, sans-serif;
+}
