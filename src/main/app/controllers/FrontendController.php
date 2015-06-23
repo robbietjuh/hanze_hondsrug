@@ -12,36 +12,13 @@
  * @date       23/06/2015
  */
 
-class FrontendController extends MvcBaseController {
+require_once "LoggedInController.php";
+
+class FrontendController extends LoggedInController {
     /**
-     * @var IdentityMiddleware Shared instance of the IdentityMiddleware middleware
+     * @var int Minimum required role to view pages in this controller
      */
-    protected $im;
-
-    /**
-     * @var array Current user account
-     */
-    protected $account;
-
-    /**
-     * Populates the controller's base variables
-     * @param $sender MvcApplication The MvcApplication that dispatched to the controller
-     */
-    public function __construct($sender) {
-        parent::__construct($sender);
-
-        // Set up the middleware
-        $this->im = $this->MvcInstance->middleware['identity'];
-
-        // Check whether the user account has access
-        $this->im->checkRole(1);
-        $this->account = $this->im->getAccount();
-
-        // Set up user data
-        $this->data['username'] = $this->account['gebruikersnaam'];
-        $this->data['displayname'] = $this->account['weergavenaam'];
-        $this->data['role'] = $this->account['rol'];
-    }
+    protected $requiredRole = 1;
 
     /**
      * Renders the frontend dashboard view
