@@ -13,16 +13,6 @@
  */
 
 class DefaultController extends MvcBaseController {
-
-    /**
-     * Renders the default frontpage
-     * @param $args array URL arguments
-     */
-    public function renderDemo($args) {
-        echo "<h1>It works!</h1>";
-        echo "Now get the capybaras and vuvuzelas out!";
-    }
-
     /**
      * Renders the default 404 page
      * @param $args
