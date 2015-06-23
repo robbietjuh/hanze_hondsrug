@@ -29,7 +29,7 @@
     <div class="jumbotron">
         <div class="container">
             <h1>Welkom, <?=$this->data['displayname'];?></h1>
-            <p class="lead">Rechts kunt u een incident melden, links kunt u uw probleem oplossen</p>
+            <p class="lead">Via dit portaal kunt u problemen oplossen of aanmelden.</p>
         </div>
     </div>
 
