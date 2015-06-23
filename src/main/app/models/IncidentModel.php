@@ -74,4 +74,24 @@ class IncidentModel extends MvcBaseModel {
         // Return the incidents
         return $incidents;
     }
+
+    /**
+     * Fetches an incident and resolves reporter user details for the given primary key
+     * @param int $pk Primary key of the incident to search for
+     * @return mixed False if nothing was found, otherwise an array
+     */
+    public function getObjectByPk($pk) {
+        // Get the incident
+        $incident = parent::getObjectByPk($pk);
+
+        // Fetch user details if an incident was found
+        if($incident !== false) {
+            $user_model = $this->loadModel("UserModel");
+            $user = $user_model->getObjectByPk($incident['melder']);
+            if($user !== false) $incident['melder'] = $user;
+        }
+
+        // Return the incident
+        return $incident;
+    }
 }
