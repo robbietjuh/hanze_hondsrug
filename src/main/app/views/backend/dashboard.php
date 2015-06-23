@@ -1,8 +1,8 @@
 <?=$this->renderView("header");?>
 
         <ol class="breadcrumb">
-            <li class="active">Backend</li>
-            <li>Dashboard</li>
+            <li>Backend</li>
+            <li class="active">Dashboard</li>
         </ol>
 
         <div class="row">
