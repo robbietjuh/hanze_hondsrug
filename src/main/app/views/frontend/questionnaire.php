@@ -1,4 +1,4 @@
-<?=$this->renderView("frontend/header");?>
+<?=$this->renderView("header");?>
 
         <ol class="breadcrumb">
             <li><a href="/">Dashboard</a></li>
@@ -17,4 +17,4 @@
             </div>
         </div>
 
-<?=$this->renderView("frontend/footer");?>
+<?=$this->renderView("footer");?>
