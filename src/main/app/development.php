@@ -57,7 +57,10 @@ class development extends MvcApplication {
      */
     protected $urls = array(
         '{^(.*)$}'                       => array('DefaultController', 'render404'),
+
         '{^/?$}'                         => array('FrontendController', 'dashboard'),
+        '{^/questionnaire/([0-9-]+)/?}'  => array('FrontendController', 'questionnaire'),
+
         '{^/login$}'                     => array('IdentityController', 'login'),
     );
 

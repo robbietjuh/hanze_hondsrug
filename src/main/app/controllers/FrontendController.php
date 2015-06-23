@@ -63,6 +63,22 @@ class FrontendController extends MvcBaseController {
     }
 
     /**
+     * Renders the frontend questionnaire view
+     * @param $args array URL params
+     */
+    public function questionnaire($args) {
+        // Fetch URL params
+        $questionnaire_id = $args[1];
+
+        // Load the Questionnaire model and load the questionnaire
+        $questionnaire_model = $this->loadModel("QuestionnaireModel");
+        $this->data['questionnaire'] = $questionnaire_model->getObjectByPk($questionnaire_id);
+
+        // Render the questionnaire detail view
+        $this->renderView("frontend/questionnaire");
+    }
+
+    /**
      * Checks for post data for incident creation and, when available, creates a
      * new incident with the given information. If the incident data was invalid,
      * it will set the viewdata's incident_error entry to a more detailed error message.
