@@ -57,11 +57,14 @@ class development extends MvcApplication {
      */
     protected $urls = array(
         '{^(.*)$}'                       => array('DefaultController', 'render404'),
-        '{^/?$}'                         => array('DefaultController', 'renderDemo'),
+        '{^/?$}'                         => array('FrontendController', 'dashboard'),
+        '{^/login$}'                     => array('IdentityController', 'login'),
     );
 
     /**
      * @var array Array of middleware
      */
-    public $middleware = array();
+    public $middleware = array(
+        'identity' => 'IdentityMiddleware'
+    );
 }
