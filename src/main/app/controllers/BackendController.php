@@ -21,15 +21,16 @@ class BackendController extends LoggedInController {
     protected $requiredRole = 2;
 
     /**
-     * Renders the frontend dashboard view
+     * Renders the backend dashboard view
      * @param $args array URL params
      */
     public function dashboard($args) {
         // Load all incidents
         $incident_model = $this->loadModel("IncidentModel");
-        $this->data['incidents'] = $incident_model->allObjects();
+        $this->data['incidents'] = $incident_model->allObjectsWithQuery("ORDER BY datum DESC");
 
         // Render the dashboard view
+        $this->data['page'] = 'incidents';
         $this->renderView("backend/dashboard");
     }
 
