@@ -55,4 +55,23 @@ class IncidentModel extends MvcBaseModel {
         else
             throw new Exception($query->errorInfo()[2]);
     }
+
+    /**
+     * Fetches all incident objects and resolves reporter user details with them
+     * @return array
+     */
+    public function allObjects() {
+        // Fetch all incidents
+        $incidents = $this->allObjectsWithQuery("ORDER BY datum");
+
+        // Fetch user details for each incident
+        $user_model = $this->loadModel("UserModel");
+        foreach($incidents as &$entry) {
+            $user = $user_model->getObjectByPk($entry['melder']);
+            if($user !== false) $entry['melder'] = $user;
+        }
+
+        // Return the incidents
+        return $incidents;
+    }
 }
