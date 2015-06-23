@@ -74,3 +74,15 @@ body.logon .sidebar footer {
     font-size: 0.8em;
     font-family: Arial, sans-serif;
 }
+
+.questionnaire-list a i {
+    font-size: 28px;
+    margin-right: 20px;
+    float: left;
+}
+
+.questionnaire-list a span {
+    padding: 5px;
+    line-height: 20px;
+    display: block;
+}

@@ -24,11 +24,6 @@ class FrontendController extends MvcBaseController {
     protected $account;
 
     /**
-     * @var HardwareComponentModel Reference to a shared HardwareComponentModel instance
-     */
-    protected $hc_model;
-
-    /**
      * Populates the controller's base variables
      * @param $sender MvcApplication The MvcApplication that dispatched to the controller
      */
@@ -45,10 +40,6 @@ class FrontendController extends MvcBaseController {
         // Set up user data
         $this->data['username'] = $this->account['gebruikersnaam'];
         $this->data['displayname'] = $this->account['weergavenaam'];
-
-        // Load all components
-        $this->hc_model = $this->loadModel("HardwareComponentModel");
-        $this->data['componentlist'] = $this->hc_model->allObjects();
     }
 
     /**
@@ -56,6 +47,14 @@ class FrontendController extends MvcBaseController {
      * @param $args array URL params
      */
     public function dashboard($args) {
+        // Load all components
+        $hc_model = $this->loadModel("HardwareComponentModel");
+        $this->data['componentlist'] = $hc_model->allObjects();
+
+        // Load all questionnaires
+        $questionnaire_model = $this->loadModel("QuestionnaireModel");
+        $this->data['questionnaires'] = $questionnaire_model->allObjects();
+
         // Hand off the incident creation
         $this->handleIncidentCreation();
 
