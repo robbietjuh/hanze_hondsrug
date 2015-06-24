@@ -99,7 +99,7 @@ class BackendController extends LoggedInController {
     public function questionnairesCreate($args) {
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             // Check input data
-            if(!isset($_POST["title"]) || !isset($_POST["icon"]))
+            if(!isset($_POST["title"]) || !isset($_POST["icon"]) || empty($_POST["title"]) || empty($_POST["icon"]))
                 $this->data['error'] = 'Please fill in all fields';
 
             else {
