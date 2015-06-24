@@ -92,4 +92,14 @@ class BackendController extends LoggedInController {
         $this->renderView("backend/questionnaires");
     }
 
+    /**
+     * Renders a view to create a new questionnaire and handles posts of that form
+     * @param array $args URL params
+     */
+    public function questionnairesCreate($args) {
+        // Render the view
+        $this->data['page'] = 'questionnaires';
+        $this->renderView("backend/create_questionnaire");
+    }
+
 }
