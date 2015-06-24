@@ -98,9 +98,6 @@ class BackendController extends LoggedInController {
      */
     public function questionnairesCreate($args) {
         if($_SERVER["REQUEST_METHOD"] == "POST") {
-            var_dump($_POST);
-            echo "<hr/>";
-
             // Check input data
             if(!isset($_POST["title"]) || !isset($_POST["icon"]))
                 $this->data['error'] = 'Please fill in all fields';
@@ -128,8 +125,6 @@ class BackendController extends LoggedInController {
                     );
                     $entry++
                 ) {
-                    echo "Processing $entry<br />";
-
                     // Fetch data
                     $question = $_POST["question_{$entry}_question"];
                     $actions = array(
@@ -158,21 +153,16 @@ class BackendController extends LoggedInController {
                         );
                     }
 
-                    echo "<code>";
-                    var_dump($to_update);
-                    echo "</code>";
-
                     // Update the back-updating array for the next question
                     $to_update = array(
                         'id' => $entry_obj['entry_id'],
                         'yes' => ($actions['yes'] == 'next_question'),
                         'no' => ($actions['no'] == 'next_question'),
                     );
-
-                    echo "{$entry_obj['entry_id']} created and updated!<hr />";
                 }
 
-                echo "Done!";
+                // Questionnaire has been created. Redirect to the overview view.
+                $this->redirectToUrl("/backend/questionnaires");
             }
         }
 
