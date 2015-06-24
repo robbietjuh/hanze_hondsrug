@@ -59,7 +59,34 @@
 
                 <div class="tab-content">
                     <div id="software" class="tab-pane active">
-                        <pre><?=print_r($this->data['software']);?></pre>
+                        <?php if(count($this->data['software']) > 0) { ?>
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-3">Producent</th>
+                                    <th class="col-md-3">Naam</th>
+                                    <th class="col-md-6">Soort</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($this->data['software'] as $entry) { ?>
+                                <tr>
+                                    <td><?=ucfirst($entry['producent']);?></td>
+                                    <td><?=ucfirst($entry['naam']);?></td>
+                                    <td><?=ucfirst($entry['soort']);?></td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+
+                        <?php } else { ?>
+
+                        <div class="alert alert-danger">
+                            Er is geen software aan deze hardware gekoppeld.
+                        </div>
+
+                        <?php } ?>
                     </div>
                     <div id="incidents" class="tab-pane">
                         hier komen incidenten
