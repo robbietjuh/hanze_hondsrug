@@ -77,8 +77,6 @@
                         next = ($(".qa-entry-" + id).length > 0);
                         if(!next) break; // Stop if no entries were found
 
-                        console.log("Verwerken van " + id);
-
                         // Get the current Q&A entry
                         var current_entry = $(".qa-entry-" + id);
 
@@ -86,8 +84,6 @@
                         $(".entry-radio", current_entry).each(function() {
                             // Bind on change
                             $(this).change(function() {
-                                console.log("Change");
-
                                 // Check whether the radio button is checked
                                 if($(this).is(':checked')) {
                                     // Hide all workarounds
