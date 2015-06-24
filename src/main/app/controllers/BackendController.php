@@ -38,7 +38,7 @@ class BackendController extends LoggedInController {
      * Renders the incident detail view
      * @param $args array URL params
      */
-    public function incident($args) {
+    public function incidentDetail($args) {
         // Load the incident
         $incident_model = $this->loadModel("IncidentModel");
         $this->data['incident'] = $incident_model->getObjectByPk($args[1]);
