@@ -99,13 +99,24 @@ class BackendController extends LoggedInController {
     public function questionnairesCreate($args) {
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             var_dump($_POST);
+            echo "<hr/>";
 
             // Check input data
             if(!isset($_POST["title"]) || !isset($_POST["icon"]))
                 $this->data['error'] = 'Please fill in all fields';
 
             else {
-                // Process every question as long as its got set:
+                // Load models
+                $qs_model = $this->loadModel("QuestionnaireModel");
+                $qs_entry_model = $this->loadModel("QuestionnaireEntryModel");
+
+                // Create the questionnaire
+                $questionnaire = $qs_model->createQuestionnaire($_POST["title"], $_POST["icon"]);
+
+                // Placeholder for back-updating
+                $to_update = array('id' => null, 'yes' => false, 'no' => false);
+
+                // Process every question as long as the following information is available for it:
                 //  * The question itself
                 //  * The yes-action
                 //  * The no-action
@@ -117,9 +128,7 @@ class BackendController extends LoggedInController {
                     );
                     $entry++
                 ) {
-                    echo "<hr />";
-
-                    echo "<ul>";
+                    echo "Processing $entry<br />";
 
                     // Fetch data
                     $question = $_POST["question_{$entry}_question"];
@@ -132,17 +141,38 @@ class BackendController extends LoggedInController {
                         'no' => $_POST["question_{$entry}_no_workaround"]
                     );
 
-                    echo "<li>Create new question: {$question}</li>";
+                    // Create a new question entry
+                    $entry_obj = $qs_entry_model->createQuestionnaireEntry(
+                        $questionnaire['id'],
+                        $question,
+                        (($actions['yes'] == 'workaround') ? $workarounds['yes'] : null),
+                        (($actions['no'] == 'workaround') ? $workarounds['no'] : null)
+                    );
 
-                    $choices = array('yes', 'no');
-                    foreach($choices as $choice) {
-                        echo "<li>Action on {$choice}: {$actions[$choice]}</li>";
-                        if ($actions[$choice] == 'workaround')
-                            echo "<ul><li>Workaround: {$workarounds[$choice]}</li></ul>";
+                    // Update old question if set and necessary
+                    if($to_update['id'] !== null && ($to_update['yes'] || $to_update['no'])) {
+                        $qs_entry_model->updateEntryNextQuestionIDs(
+                            $to_update['id'],
+                            ($to_update['yes']) ? $entry_obj['entry_id'] : null,
+                            ($to_update['no']) ? $entry_obj['entry_id'] : null
+                        );
                     }
 
-                    echo "</ul>";
+                    echo "<code>";
+                    var_dump($to_update);
+                    echo "</code>";
+
+                    // Update the back-updating array for the next question
+                    $to_update = array(
+                        'id' => $entry_obj['entry_id'],
+                        'yes' => ($actions['yes'] == 'next_question'),
+                        'no' => ($actions['no'] == 'next_question'),
+                    );
+
+                    echo "{$entry_obj['entry_id']} created and updated!<hr />";
                 }
+
+                echo "Done!";
             }
         }
 
