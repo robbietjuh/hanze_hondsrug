@@ -8,12 +8,15 @@
 
         <div class="row">
             <div class="col-md-8">
-                <h4 style="margin-bottom: 20px;"><?=htmlentities($this->data['questionnaire']['titel']);?></h4>
+                <h4 style="margin-bottom: 20px;"
+                    class="questionnaire-title"><?=htmlentities($this->data['questionnaire']['titel']);?></h4>
+
+                <span class="hidden questionnaire-id"><?=$this->data['questionnaire']['id'];?></span>
 
                 <?php foreach($this->data['questionnaire_entries'] as $num => $entry) { ?>
 
                 <div class="qa qa-entry-<?=$num+1;?> hidden" data-entry-id="<?=$num+1;?>">
-                    <strong><?=$num+1;?>. <?=$entry['vraag'];?></strong>
+                    <strong class="qa-question"><?=$num+1;?>. <?=$entry['vraag'];?></strong>
 
                     <div class="radio">
                         <label>
@@ -38,7 +41,7 @@
 
                     <div class="alert alert-success hidden workaround workaround-<?=$workaround_type;?>">
                         <p><strong>Workaround voor dit probleem</strong></p>
-                        <p><?=$entry["{$workaround_type}_workaround"];?></p>
+                        <p class="workaround-txt"><?=$entry["{$workaround_type}_workaround"];?></p>
                         <p>
                             <strong>Lost dit uw probleem niet op?</strong>
                             U kunt een nieuw incident aanmaken aan de rechterzijde van de pagina.
@@ -66,6 +69,43 @@
                         else if($(this).hasClass("hidden"))
                             $(this).removeClass("hidden"); // Yes - show it
                     });
+                }
+
+                function addStepsToDescription() {
+                    // Placeholders
+                    var steps = '';
+                    var next = true;
+
+                    // Fetch steps
+                    $(".qa").each(function() {
+                        if (!$(this).hasClass("hidden")) {
+                            // Fetch choices
+                            var choice = $("input[type='radio']:checked", this);
+                            if (choice.length > 0) {
+                                steps += '\n' + $(".qa-question", this).text() + '\n';
+                                steps += ' * Gekozen voor ' + choice.val() + '\n';
+                            }
+                        }
+                    });
+
+                    // Check for a workaround
+                    $(".workaround").each(function() {
+                        if(!$(this).hasClass("hidden")) {
+                            steps += '\nGevonden workaround:\n';
+                            steps += $("p.workaround-txt", this).text()
+                        }
+                    });
+
+                    // Fill in the textarea
+                    $("textarea[name='description']").val(
+                        $("textarea[name='description']").val() +
+                        '\n___________\n' +
+                        'Dit incident is verstuurd na het invullen van vragenlijst ' +
+                        '#' + $(".questionnaire-id").text() + ' ' + $(".questionnaire-title").text() + '.\n\n' +
+
+                        'De volgende stappen zijn doorlopen: \n' +
+                        steps
+                    );
                 }
 
                 $(document).ready(function() {
