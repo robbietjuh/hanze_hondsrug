@@ -34,7 +34,7 @@
                     <div class="hidden question-template">
                         <div class="form-group">
                             <label class="question_title">Vraag #</label>
-                            <input type="text" name="question" class="form-control" required />
+                            <input type="text" name="question" class="form-control" />
                         </div>
 
                         <div class="form-group">
