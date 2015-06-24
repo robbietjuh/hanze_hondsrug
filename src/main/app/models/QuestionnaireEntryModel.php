@@ -53,6 +53,14 @@ class QuestionnaireEntryModel extends MvcBaseModel {
             throw new Exception($query->errorInfo()[2]);
     }
 
+    /**
+     * Updates entry question IDs for their yes and no clauses and returns the resulting entry
+     * @param int $entry_id ID of the entry to update
+     * @param int $yes_question ID of the question to show for the yes clause
+     * @param int $no_question ID of the question to show for the no clause
+     * @return array The resulting entry
+     * @throws Exception
+     */
     public function updateEntryNextQuestionIDs($entry_id, $yes_question, $no_question) {
         // Set up query
         $query = $this->MvcInstance->db_conn->prepare(
