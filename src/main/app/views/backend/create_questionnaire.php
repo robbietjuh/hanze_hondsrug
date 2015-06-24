@@ -38,7 +38,7 @@
 
                             <div>
                                 <input type="radio" name="yes_action" value="workaround" />
-                                <input type="text" name="workaround" class="form-control"
+                                <input type="text" name="yes_workaround" class="form-control"
                                        style="width: 97%; display: inline-block;"
                                        placeholder="Workaround weergeven" />
                             </div>
@@ -54,7 +54,7 @@
 
                             <div>
                                 <input type="radio" name="no_action" value="workaround" />
-                                <input type="text" name="workaround" class="form-control"
+                                <input type="text" name="no_workaround" class="form-control"
                                        style="width: 97%; display: inline-block;" placeholder="Workaround weergeven" />
                             </div>
                         </div>
