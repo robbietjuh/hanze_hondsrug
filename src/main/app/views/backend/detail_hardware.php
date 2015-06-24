@@ -122,6 +122,13 @@
                         <?php } ?>
                     </div>
                 </div>
+
+                <hr />
+
+                <a href="/backend/hardware/<?=$this->data['ci']['identificatiecode'];?>/delete"
+                   class="btn btn-danger pull-right">
+                    <i class="glyphicon glyphicon-trash"></i> Item verwijderen
+                </a>
             </div>
         </div>
 

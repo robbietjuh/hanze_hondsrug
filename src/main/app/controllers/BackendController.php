@@ -198,7 +198,7 @@ class BackendController extends LoggedInController {
 
     /**
      * Renders the hardware overview page
-     * @param $args
+     * @param array $args URL params
      */
     public function hardware($args) {
         // Load the model
@@ -212,7 +212,7 @@ class BackendController extends LoggedInController {
 
     /**
      * Renders the hardware detail page
-     * @param $args
+     * @param array $args URL params
      */
     public function hardwareDetail($args) {
         // Load all models
@@ -239,5 +239,28 @@ class BackendController extends LoggedInController {
         // Render the hardware detail view
         $this->data['page'] = 'hardware';
         $this->renderView("backend/detail_hardware");
+    }
+
+    /**
+     * Deletes the CI item specified in the url params
+     * @param array $args URL params
+     */
+    public function hardwareDelete($args) {
+        // Load the CI item
+        $hardware_model = $this->loadModel("HardwareModel");
+        $ci = $hardware_model->getObjectByPk($args[1]);
+
+        // Show 404 when no hardware was found
+        if($ci === false)
+            $this->MvcInstance->dieWithDebugMessageOr404(
+                "Hardware not found",
+                array("URL arguments" => $args)
+            );
+
+        // Delete the item
+        $hardware_model->deleteWithPk($args[1]);
+
+        // Redirect back to the overview view
+        $this->redirectToUrl("/backend/hardware");
     }
 }
