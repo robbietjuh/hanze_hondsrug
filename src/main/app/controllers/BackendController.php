@@ -100,7 +100,7 @@ class BackendController extends LoggedInController {
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             // Check input data
             if(!isset($_POST["title"]) || !isset($_POST["icon"]) || empty($_POST["title"]) || empty($_POST["icon"]))
-                $this->data['error'] = 'Please fill in all fields';
+                $this->data['error'] = 'Vul alle velden in.';
 
             else {
                 // Load models
