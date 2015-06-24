@@ -90,4 +90,21 @@ class QuestionnaireEntryModel extends MvcBaseModel {
     public function getEntriesForQuestionnaire($questionnaire_id) {
         return $this->allObjectsWithQuery("WHERE vragenlijst_id = :id", array(':id' => $questionnaire_id));
     }
+
+    /**
+     * Deletes all entries that are linked with a specific quesitonnaire
+     * @param int $questionnaire_id Questionnaire ID
+     * @return bool
+     * @throws Exception
+     */
+    public function deleteWithQuestionnaireId($questionnaire_id) {
+        // Set up query
+        $query = $this->MvcInstance->db_conn->prepare("DELETE FROM {$this->tableName} WHERE vragenlijst_id = :id");
+
+        // .. and execute it
+        if($query->execute(array(':id' => $questionnaire_id)))
+            return true;
+        else
+            throw new Exception($query->errorInfo()[2]);
+    }
 }

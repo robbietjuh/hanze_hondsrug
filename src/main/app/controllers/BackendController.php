@@ -171,4 +171,29 @@ class BackendController extends LoggedInController {
         $this->renderView("backend/create_questionnaire");
     }
 
+    /**
+     * Deletes an questionnaire and redirects back to the questionnaire overview view afterwards
+     * @param $args array URL params
+     */
+    public function questionnairesDelete($args) {
+        // Load models and the questionnaire itself
+        $qs_model = $this->loadModel("QuestionnaireModel");
+        $qse_model = $this->loadModel("QuestionnaireEntryModel");
+        $questionnaire = $qs_model->getObjectByPk($args[1]);
+
+        // Show 404 when no incident was found
+        if($questionnaire === false)
+            $this->MvcInstance->dieWithDebugMessageOr404(
+                "Questionnaire not found",
+                array("URL arguments" => $args)
+            );
+
+        // Delete questionnaire entries and the questionnaire itself
+        $qse_model->deleteWithQuestionnaireId($args[1]);
+        $qs_model->deleteWithPk($args[1]);
+
+        // Redirect back to the dashboard
+        $this->redirectToUrl("/backend/questionnaires");
+    }
+
 }

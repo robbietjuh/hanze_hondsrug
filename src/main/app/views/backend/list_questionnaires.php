@@ -4,7 +4,8 @@
                         <tr>
                             <th class="col-md-2">Datum</th>
                             <th class="col-md-6">Titel</th>
-                            <th class="col-md-4">Icoon</th>
+                            <th class="col-md-2">Icoon</th>
+                            <th class="col-md-2">Acties</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -17,6 +18,11 @@
                                 </a>
                             </td>
                             <td><i class="glyphicon glyphicon-<?=$qs['icoon'];?>"></i> <?=$qs['icoon'];?></td>
+                            <td>
+                                <a href="/backend/questionnaires/<?=$qs['id'];?>/delete" class="text-danger">
+                                    <i class="glyphicon glyphicon-trash"></i> Verwijderen
+                                </a>
+                            </td>
                         </tr>
                         <?php } ?>
                     </tbody>
