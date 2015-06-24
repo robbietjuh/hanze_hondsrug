@@ -48,7 +48,7 @@
                 <div style="text-align: right">
                     <a href="/backend/incident/<?=$this->data['incident']['identificatiecode'];?>/delete"
                        class="btn btn-danger">Incident verwijderen</a>
-                    <a href="/backend/questionnaire/create" class="btn btn-default">Nieuwe vragenlijst</a>
+                    <a href="/backend/questionnaires/create" class="btn btn-default">Nieuwe vragenlijst</a>
                 </div>
             </div>
         </div>
