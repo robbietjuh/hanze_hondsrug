@@ -23,18 +23,18 @@
                 <form action="" method="post">
                     <div class="form-group">
                         <label for="title">Titel voor vragenlijst</label>
-                        <input type="text" name="title" id="title" class="form-control" />
+                        <input type="text" name="title" id="title" class="form-control" required />
                     </div>
 
                     <div class="form-group">
                         <label for="icon">Naam van icoon</label>
-                        <input type="text" name="icon" id="icon" class="form-control" />
+                        <input type="text" name="icon" id="icon" class="form-control" required />
                     </div>
 
                     <div class="hidden question-template">
                         <div class="form-group">
                             <label class="question_title">Vraag #</label>
-                            <input type="text" name="question" class="form-control" />
+                            <input type="text" name="question" class="form-control" required />
                         </div>
 
                         <div class="form-group">
