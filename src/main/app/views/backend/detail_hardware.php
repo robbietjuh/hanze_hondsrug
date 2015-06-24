@@ -14,22 +14,22 @@
                 <div class="well">
                     <div class="row">
                         <div class="col-md-4"><strong>Identificatiecode</strong></div>
-                        <div class="col-md-8"><?=$this->data['ci']['identificatiecode'];?></div>
+                        <div class="col-md-8"><?=strtoupper($this->data['ci']['identificatiecode']);?></div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4"><strong>Soort</strong></div>
-                        <div class="col-md-8"><?=$this->data['ci']['soort'];?></div>
+                        <div class="col-md-8"><?=ucfirst($this->data['ci']['soort']);?></div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4"><strong>Merk</strong></div>
-                        <div class="col-md-8"><?=$this->data['ci']['merk'];?></div>
+                        <div class="col-md-8"><?=ucfirst($this->data['ci']['merk']);?></div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4"><strong>Leverancier</strong></div>
-                        <div class="col-md-8"><?=$this->data['ci']['leverancier'];?></div>
+                        <div class="col-md-8"><?=ucfirst($this->data['ci']['leverancier']);?></div>
                     </div>
 
                     <div class="row">
@@ -39,7 +39,7 @@
 
                     <div class="row">
                         <div class="col-md-4"><strong>Locatie</strong></div>
-                        <div class="col-md-8"><?=$this->data['ci']['locatie'];?></div>
+                        <div class="col-md-8"><?=ucfirst($this->data['ci']['locatie']);?></div>
                     </div>
 
                     <?php if(!empty($this->data['ci']['opmerkingen'])) { ?>
