@@ -60,6 +60,9 @@ class FrontendController extends LoggedInController {
         $questionnaire_model = $this->loadModel("QuestionnaireEntryModel");
         $this->data['questionnaire_entries'] = $questionnaire_model->getEntriesForQuestionnaire($questionnaire_id);
 
+        // Hand off the incident creation
+        $this->handleIncidentCreation();
+
         // Render the questionnaire detail view
         $this->renderView("frontend/questionnaire");
     }
