@@ -112,16 +112,9 @@
                     // Placeholder which determines whether to continue looping or not
                     var next = true;
 
-                    for(var id = 1; next; id++) {
-                        // Check whether the Q&A entry was found
-                        next = ($(".qa-entry-" + id).length > 0);
-                        if(!next) break; // Stop if no entries were found
-
-                        // Get the current Q&A entry
-                        var current_entry = $(".qa-entry-" + id);
-
+                    $(".qa").each(function() {
                         // Configure the radio buttons
-                        $(".entry-radio", current_entry).each(function() {
+                        $(".entry-radio", this).each(function() {
                             // Bind on change
                             $(this).change(function() {
                                 // Check whether the radio button is checked
@@ -147,8 +140,8 @@
                         });
 
                         // Show if this is the first entry
-                        if(id == 1) $(".qa-entry-" + id).removeClass("hidden");
-                    }
+                        if($(this).data('entry-id') == 1) $(this).removeClass("hidden");
+                    });
                 });
             </script>
 
