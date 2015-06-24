@@ -215,8 +215,11 @@ class BackendController extends LoggedInController {
      * @param $args
      */
     public function hardwareDetail($args) {
-        // Load the CI item
+        // Load all models
         $hardware_model = $this->loadModel("HardwareModel");
+        $software_model = $this->loadModel("SoftwareModel");
+
+        // Load the CI item
         $this->data['ci'] = $hardware_model->getObjectByPk($args[1]);
 
         // Show 404 when no hardware was found
@@ -225,6 +228,9 @@ class BackendController extends LoggedInController {
                 "Hardware not found",
                 array("URL arguments" => $args)
             );
+
+        // Get related software
+        $this->data['software'] = $software_model->getSoftwareForHardware($args[1]);
 
         // Render the hardware detail view
         $this->data['page'] = 'hardware';

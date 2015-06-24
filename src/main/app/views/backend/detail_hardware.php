@@ -59,7 +59,7 @@
 
                 <div class="tab-content">
                     <div id="software" class="tab-pane active">
-                        hier komt software
+                        <pre><?=print_r($this->data['software']);?></pre>
                     </div>
                     <div id="incidents" class="tab-pane">
                         hier komen incidenten
