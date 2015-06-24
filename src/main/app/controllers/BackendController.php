@@ -196,4 +196,17 @@ class BackendController extends LoggedInController {
         $this->redirectToUrl("/backend/questionnaires");
     }
 
+    /**
+     * Renders the hardware overview page
+     * @param $args
+     */
+    public function hardware($args) {
+        // Load the model
+        $hardware_model = $this->loadModel("HardwareModel");
+        $this->data['hardwarelist'] = $hardware_model->allObjects();
+
+        // Render the page
+        $this->data['page'] = 'hardware';
+        $this->renderView("backend/hardware");
+    }
 }
