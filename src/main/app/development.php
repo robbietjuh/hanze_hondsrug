@@ -70,6 +70,7 @@ class development extends MvcApplication {
         '{^/backend/hardware$}'              => array('BackendController', 'hardware'),
         '{^/backend/hardware/([[:alnum:]-]+)*$}' => array('BackendController', 'hardwareDetail'),
         '{^/backend/hardware/([[:alnum:]-]+)*/delete$}' => array('BackendController', 'hardwareDelete'),
+        '{^/backend/hardware/create$}'       => array('BackendController', 'hardwareCreate'),
 
         '{^/login$}'                         => array('IdentityController', 'login'),
         '{^/logout$}'                        => array('IdentityController', 'logout'),

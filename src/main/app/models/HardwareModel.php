@@ -21,4 +21,40 @@ class HardwareModel extends MvcBaseModel {
      * @var string Database table primary key field name for this model
      */
     protected $tablePrimaryKeyField = "identificatiecode";
+
+    /**
+     * Creates a new hardware entry and returns the resulting data
+     * @param string $id
+     * @param string $kind
+     * @param string $brand
+     * @param string $supplier
+     * @param string $location
+     * @return array
+     * @throws Exception
+     */
+    public function createHardwareEntry($id, $kind, $brand, $supplier, $location) {
+        // Set up query
+        $query = $this->MvcInstance->db_conn->prepare(
+            "INSERT INTO {$this->tableName} SET" .
+            " identificatiecode = :id," .
+            " soort = :kind," .
+            " leverancier = :supplier," .
+            " locatie = :location," .
+            " merk = :brand, " .
+            " aanschaf_jaar = :acq_year"
+        );
+
+        // .. and execute it
+        if($query->execute(array(
+            ':id' => $id,
+            ':kind' => $kind,
+            ':supplier' => $supplier,
+            ':location' => $location,
+            ':brand' => $brand,
+            ':acq_year' => date('Y')
+        )))
+            return $this->getObjectByPk($id);
+        else
+            throw new Exception($query->errorInfo()[2]);
+    }
 }

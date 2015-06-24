@@ -263,4 +263,57 @@ class BackendController extends LoggedInController {
         // Redirect back to the overview view
         $this->redirectToUrl("/backend/hardware");
     }
+
+    /**
+     * Renders the hardware creation view
+     * @param array $args URL params
+     */
+    public function hardwareCreate($args) {
+        // Load all models
+        $hardware_model = $this->loadModel("HardwareModel");
+        $location_model = $this->loadModel("LocationModel");
+        $software_model = $this->loadModel("SoftwareModel");
+        $hs_relation_model = $this->loadModel("HardwareSoftwareModel");
+
+        // Process creation requests
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Check if everything has been filled out
+            if(!isset($_POST["id"]) || !isset($_POST["soort"]) || !isset($_POST["leverancier"]) ||
+                !isset($_POST["locatie"]) || empty($_POST["id"]) || empty($_POST["soort"]) ||
+                empty($_POST["merk"]) || empty($_POST["leverancier"]) || empty($_POST["locatie"]))
+                $this->data['error'] = 'Vul alle velden in.';
+
+            // Check location existence
+            else if($location_model->getObjectByPk($_POST["locatie"]) === false)
+                $this->data['error'] = 'Ongeldige locatie.';
+
+            // Check CI item existence
+            else if($hardware_model->getObjectByPk($_POST["id"]) !== false)
+                $this->data['error'] = 'De opgegeven naam bestaat al.';
+
+            else {
+                // Create the hardware entry
+                $ci_item = $hardware_model->createHardwareEntry(
+                    $_POST["id"], $_POST["soort"], $_POST["merk"], $_POST["leverancier"], $_POST["locatie"]
+                );
+
+                var_dump($ci_item);
+                // Create software relationships
+                foreach($_POST["software"] as $software_id)
+                    if($software_model->getObjectByPk($software_id) !== false)
+                        $hs_relation_model->createRelationship($ci_item['identificatiecode'], $software_id);
+
+                // Redirect to the item
+                $this->redirectToUrl("/backend/hardware/{$ci_item['identificatiecode']}");
+            }
+        }
+
+        // Populate software and location data
+        $this->data['software'] = $software_model->allObjects();
+        $this->data['locations'] = $location_model->allObjects();
+
+        // Render the view
+        $this->data['page'] = 'hardware';
+        $this->renderView("backend/create_hardware");
+    }
 }

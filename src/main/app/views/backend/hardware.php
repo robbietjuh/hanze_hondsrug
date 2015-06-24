@@ -34,6 +34,12 @@
                         <?php } ?>
                     </tbody>
                 </table>
+
+                <hr />
+
+                <div style="text-align: right">
+                    <a href="/backend/hardware/create" class="btn btn-default">Nieuw configuratie-item</a>
+                </div>
             </div>
         </div>
 

@@ -30,4 +30,29 @@ class HardwareSoftwareModel extends MvcBaseModel {
     public function getSoftwareForHardware($hardware_id) {
         return $this->allObjectsWithQuery("WHERE hardware_identificatiecode = :id", array(':id' => $hardware_id));
     }
+
+    /**
+     * Sets up a new relationship between given hardware ID and given software ID
+     * @param string $hardware_id Hardware ID
+     * @param string $software_id Software ID
+     * @return array
+     * @throws Exception
+     */
+    public function createRelationship($hardware_id, $software_id) {
+        // Set up query
+        $query = $this->MvcInstance->db_conn->prepare(
+            "INSERT INTO {$this->tableName} SET" .
+            " hardware_identificatiecode = :hardware_id," .
+            " software_identificatiecode = :software_id"
+        );
+
+        // .. and execute it
+        if($query->execute(array(
+            ':hardware_id' => $hardware_id,
+            ':software_id' => $software_id
+        )))
+            return $this->getObjectByPk($this->MvcInstance->db_conn->lastInsertId());
+        else
+            throw new Exception($query->errorInfo()[2]);
+    }
 }
