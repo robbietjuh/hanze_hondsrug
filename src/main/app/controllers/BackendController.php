@@ -209,4 +209,25 @@ class BackendController extends LoggedInController {
         $this->data['page'] = 'hardware';
         $this->renderView("backend/hardware");
     }
+
+    /**
+     * Renders the hardware detail page
+     * @param $args
+     */
+    public function hardwareDetail($args) {
+        // Load the CI item
+        $hardware_model = $this->loadModel("HardwareModel");
+        $this->data['ci'] = $hardware_model->getObjectByPk($args[1]);
+
+        // Show 404 when no hardware was found
+        if($this->data['ci'] === false)
+            $this->MvcInstance->dieWithDebugMessageOr404(
+                "Hardware not found",
+                array("URL arguments" => $args)
+            );
+
+        // Render the hardware detail view
+        $this->data['page'] = 'hardware';
+        $this->renderView("backend/detail_hardware");
+    }
 }

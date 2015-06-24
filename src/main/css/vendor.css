@@ -91,11 +91,13 @@ body.logon .sidebar footer {
     display: block;
 }
 
-.incident-detail .well .row {
+.incident-detail .well .row,
+.hardware-detail .well .row {
     margin-bottom: 5px;
 }
 
-.incident-detail .well .row:last-child {
+.incident-detail .well .row:last-child,
+.hardware-detail .well .row:last-child {
     margin-bottom: 0;
 }
 
