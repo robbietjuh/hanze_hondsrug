@@ -11,6 +11,15 @@
                 <?=$this->renderView("backend/menu");?>
             </div>
             <div class="col-md-8">
+                <?php if(isset($this->data['error'])) { ?>
+
+                    <div class="alert alert-danger">
+                        <strong>De vragenlijst kon niet aangemaakt worden.</strong>
+                        <p><?=$this->data['error'];?></p>
+                    </div>
+
+                <?php } ?>
+
                 <form action="" method="post">
                     <div class="form-group">
                         <label for="title">Titel voor vragenlijst</label>
