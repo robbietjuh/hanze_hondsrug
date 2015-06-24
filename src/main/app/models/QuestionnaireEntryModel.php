@@ -81,4 +81,8 @@ class QuestionnaireEntryModel extends MvcBaseModel {
         else
             throw new Exception($query->errorInfo()[2]);
     }
+
+    public function getEntriesForQuestionnaire($questionnaire_id) {
+        return $this->allObjectsWithQuery("WHERE vragenlijst_id = :id", array(':id' => $questionnaire_id));
+    }
 }
