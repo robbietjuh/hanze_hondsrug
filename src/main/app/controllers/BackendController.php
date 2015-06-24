@@ -218,6 +218,7 @@ class BackendController extends LoggedInController {
         // Load all models
         $hardware_model = $this->loadModel("HardwareModel");
         $software_model = $this->loadModel("SoftwareModel");
+        $incident_model = $this->loadModel("IncidentModel");
 
         // Load the CI item
         $this->data['ci'] = $hardware_model->getObjectByPk($args[1]);
@@ -231,6 +232,9 @@ class BackendController extends LoggedInController {
 
         // Get related software
         $this->data['software'] = $software_model->getSoftwareForHardware($args[1]);
+
+        // Get related incidents
+        $this->data['incidents'] = $incident_model->getIncidentsForHardware($args[1]);
 
         // Render the hardware detail view
         $this->data['page'] = 'hardware';

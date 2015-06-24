@@ -94,4 +94,27 @@ class IncidentModel extends MvcBaseModel {
         // Return the incident
         return $incident;
     }
+
+    /**
+     * Fetches all incidents related to a specific hardware entry
+     * @param string $hardware_id Hardware ID
+     * @return array
+     */
+    public function getIncidentsForHardware($hardware_id) {
+        // Get the incidents
+        $incidents = $this->allObjectsWithQuery(
+            "WHERE hardware_component = :hardware_id",
+            array(":hardware_id" => $hardware_id)
+        );
+
+        // Fetch user details for each incident
+        $user_model = $this->loadModel("UserModel");
+        foreach($incidents as &$entry) {
+            $user = $user_model->getObjectByPk($entry['melder']);
+            if($user !== false) $entry['melder'] = $user;
+        }
+
+        // Return the incidents
+        return $incidents;
+    }
 }

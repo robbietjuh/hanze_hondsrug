@@ -29,7 +29,11 @@
 
                     <div class="row">
                         <div class="col-md-4"><strong>Werkstation</strong></div>
-                        <div class="col-md-8"><?=$this->data['incident']['hardware_component'];?></div>
+                        <div class="col-md-8">
+                            <a href="/backend/hardware/<?=$this->data['incident']['hardware_component'];?>">
+                                <?=strtoupper($this->data['incident']['hardware_component']);?>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="row">

@@ -82,14 +82,44 @@
 
                         <?php } else { ?>
 
-                        <div class="alert alert-danger">
+                        <div class="alert alert-info">
                             Er is geen software aan deze hardware gekoppeld.
                         </div>
 
                         <?php } ?>
                     </div>
                     <div id="incidents" class="tab-pane">
-                        hier komen incidenten
+                        <?php if(count($this->data['incidents']) > 0) { ?>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th class="col-md-2">Datum</th>
+                                <th class="col-md-6">Omschrijving</th>
+                                <th class="col-md-2">Werkstation</th>
+                                <th class="col-md-2">Melder</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($this->data['incidents'] as $incident) { ?>
+                                <tr>
+                                    <td><?=date_format(date_create($incident['datum']), "d-m-Y");?></td>
+                                    <td>
+                                        <a href="/backend/incident/<?=$incident['identificatiecode'];?>">
+                                            <?=$incident['titel'];?>
+                                        </a>
+                                    </td>
+                                    <td><?=$incident['hardware_component'];?></td>
+                                    <td><?=$incident['melder']['weergavenaam'];?></td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                        <?php } else { ?>
+                        <div class="alert alert-success">
+                            <strong>Geen incidenten gevonden.</strong>
+                            <p>Er zijn geen incidenten aan dit configuratie item gekoppeld.</p>
+                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
