@@ -97,6 +97,55 @@ class BackendController extends LoggedInController {
      * @param array $args URL params
      */
     public function questionnairesCreate($args) {
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+            var_dump($_POST);
+
+            // Check input data
+            if(!isset($_POST["title"]) || !isset($_POST["icon"]))
+                $this->data['error'] = 'Please fill in all fields';
+
+            else {
+                // Process every question as long as its got set:
+                //  * The question itself
+                //  * The yes-action
+                //  * The no-action
+                for(
+                    $entry = 1;
+                    (   isset($_POST["question_{$entry}_question"]) &&
+                        isset($_POST["question_{$entry}_yes_action"]) &&
+                        isset($_POST["question_{$entry}_no_action"])
+                    );
+                    $entry++
+                ) {
+                    echo "<hr />";
+
+                    echo "<ul>";
+
+                    // Fetch data
+                    $question = $_POST["question_{$entry}_question"];
+                    $actions = array(
+                        'yes' => $_POST["question_{$entry}_yes_action"],
+                        'no'  => $_POST["question_{$entry}_no_action"]
+                    );
+                    $workarounds = array(
+                        'yes' => $_POST["question_{$entry}_yes_workaround"],
+                        'no' => $_POST["question_{$entry}_no_workaround"]
+                    );
+
+                    echo "<li>Create new question: {$question}</li>";
+
+                    $choices = array('yes', 'no');
+                    foreach($choices as $choice) {
+                        echo "<li>Action on {$choice}: {$actions[$choice]}</li>";
+                        if ($actions[$choice] == 'workaround')
+                            echo "<ul><li>Workaround: {$workarounds[$choice]}</li></ul>";
+                    }
+
+                    echo "</ul>";
+                }
+            }
+        }
+
         // Render the view
         $this->data['page'] = 'questionnaires';
         $this->renderView("backend/create_questionnaire");
