@@ -82,6 +82,11 @@ class QuestionnaireEntryModel extends MvcBaseModel {
             throw new Exception($query->errorInfo()[2]);
     }
 
+    /**
+     * Returns all questionnaire entries that are linked to the specified questionnaire
+     * @param int $questionnaire_id Questionnaire ID
+     * @return array Linked questionnaire entries
+     */
     public function getEntriesForQuestionnaire($questionnaire_id) {
         return $this->allObjectsWithQuery("WHERE vragenlijst_id = :id", array(':id' => $questionnaire_id));
     }
